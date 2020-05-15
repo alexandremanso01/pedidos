@@ -3,16 +3,21 @@ package com.example.pedidos;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pedidos.DataBase.DadosOpenHelper;
 
 public class Tela2Activity extends AppCompatActivity {
+
     DadosOpenHelper mdb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,16 +25,7 @@ public class Tela2Activity extends AppCompatActivity {
 
         mdb = new DadosOpenHelper(this, "lista", null, 1);
 
-
-
-        TextView tfTexto = (TextView) findViewById(R.id.tvValort2);
-        TextView tvTextoNome = (TextView)findViewById(R.id.textView6);
-
-        Bundle extra = getIntent().getExtras();
-        String prRecebido = extra.getString("parametro");
-        String prRecebido1 = extra.getString("parametro1");
-        tfTexto.setText(prRecebido);
-        tvTextoNome.setText(prRecebido1);
+        updateTf();
         exibirPedido();
 
     }
@@ -44,9 +40,14 @@ public class Tela2Activity extends AppCompatActivity {
                 String id = cursor.getString(0);
                 String nome = cursor.getString(1);
                 String valor = cursor.getString(2);
-                CharSequence registro = id + ", " + nome+", " + valor;
+                CharSequence registro =" N° " + id + ",      "+"Nome: "+nome+",      "+"Valor: " + valor;
+//                CharSequence registroNome = nome;
+ //               CharSequence registroValor = valor;
                 ((EditText)findViewById(R.id.editText)).append(registro + "\n");
+//                ((EditText)findViewById(R.id.editText2)).append(registroNome + "\n");
+//                ((EditText)findViewById(R.id.editText4)).append(registroValor + "\n");
             }while (cursor.moveToNext());
+
         }
     }
 
@@ -55,7 +56,26 @@ public class Tela2Activity extends AppCompatActivity {
         String valor = ((TextView)findViewById(R.id.tvValort2)).getText().toString();
         mdb.insertDados(nome, valor);
         exibirPedido();
+        toast();
+    }
 
+    public void updateTf(){
+        TextView tfTexto = (TextView) findViewById(R.id.tvValort2);
+        TextView tvTextoNome = (TextView)findViewById(R.id.textView6);
+        Bundle extra = getIntent().getExtras();
+        String prRecebido = extra.getString("parametro");
+        String prRecebido1 = extra.getString("parametro1");
+        tfTexto.setText(prRecebido);
+        tvTextoNome.setText(prRecebido1);
+    }
+
+    public void toast(){
+        Context context = getApplicationContext();
+        CharSequence text = "Seu pedido foi Cadastrado com sucesso!!!";
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+        toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
     }
 
 

@@ -103,7 +103,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="10dp"
         android:background="@color/colorPrimary"
-        android:onClick="fazerPedido"
+        android:onClick="calcular"
         android:text="Calcular"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
