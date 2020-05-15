@@ -30,7 +30,6 @@ public class Tela2Activity extends AppCompatActivity {
 
     }
 
-
     public void exibirPedido(){
         ((EditText)findViewById(R.id.editText)).setText(" ");
         Cursor cursor = mdb.getDados();

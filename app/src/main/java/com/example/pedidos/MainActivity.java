@@ -49,19 +49,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void telaActive2(){
-
         final TextView tvActivity2 = (TextView) findViewById(R.id.tvTotal);
         final EditText tvActivity1 = (EditText) findViewById(R.id.editText3);
-
-
         Button btTela2 = (Button)findViewById(R.id.button2);
         btTela2.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
-
                 Intent it = new Intent(MainActivity.this, Tela2Activity.class);
                 it.putExtra("parametro", tvActivity2.getText().toString());
-               it.putExtra("parametro1", tvActivity1.getText().toString());
+                it.putExtra("parametro1", tvActivity1.getText().toString());
 
                 String tvtoalif = ((TextView) findViewById(R.id.tvTotal)).getText().toString();
                     if(!(tvtoalif=="")) {
@@ -71,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                     }
             }
         });
-
     }
 
     public void showSpinner(){
@@ -83,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void popup() {
         AlertDialog alerta;
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ATENÇÃO!!!");
         builder.setMessage("Campos Nome e Quantidade não pode ser vazio ou 0!!!");
