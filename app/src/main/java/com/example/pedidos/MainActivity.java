@@ -17,12 +17,11 @@ import android.widget.TextView;
 import com.example.pedidos.DataBase.DadosOpenHelper;
 
 public class MainActivity extends AppCompatActivity {
-    DadosOpenHelper mdb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mdb = new DadosOpenHelper(this, "lista", null, 1);
 
         Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.products, android.R.layout.simple_spinner_item);
@@ -31,20 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         telaActive2();
 
-
-
     }
-
-    public void inserirDados(View view){
-        String nome = ((EditText)findViewById(R.id.editText3)).getText().toString();
-        String valor = ((TextView)findViewById(R.id.tvTotal)).getText().toString();
-        mdb.insertDados(nome, valor);
-
-        exibirPedido();
-
-    }
-
-
 
     public void fazerPedido(View view){
 
@@ -59,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void telaActive2(){
+
         final TextView tvActivity2 = (TextView) findViewById(R.id.tvTotal);
         final EditText tvActivity1 = (EditText) findViewById(R.id.editText3);
 
@@ -76,20 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void exibirPedido(){
-        ((EditText)findViewById(R.id.editText2)).setText(" ");
-        Cursor cursor = mdb.getDados();
-        if(cursor.getCount() > 0){
-            cursor.moveToFirst();
-            do {
-                String id = cursor.getString(0);
-                String nome = cursor.getString(1);
-                String valor = cursor.getString(2);
-                CharSequence registro = id + ", " + nome+", " + valor;
-                ((EditText)findViewById(R.id.editText2)).append(registro + "\n");
-            }while (cursor.moveToNext());
-        }
 
-    }
 
 }
