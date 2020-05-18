@@ -37,4 +37,23 @@ public class DadosOpenHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("select * from pedido", null);
     }
+    public Cursor getDados(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("select * from pedido where id = " + id , null);
+    }
+
+    public void alterarDados(int id, String nome, String valor){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues dadosAtualizados = new ContentValues();
+        dadosAtualizados.put("nome", nome);
+        dadosAtualizados.put("valor", valor);
+        db.update("pedido", dadosAtualizados, "id = ?", new String[]{String.valueOf(id)});
+    }
+
+    public void excluir(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("pedido", "id = ?", new String[]{String.valueOf(id)});
+
+    }
+
 }

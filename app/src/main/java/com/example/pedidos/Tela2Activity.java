@@ -17,6 +17,7 @@ import com.example.pedidos.DataBase.DadosOpenHelper;
 public class Tela2Activity extends AppCompatActivity {
 
     DadosOpenHelper mdb;
+    Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +27,13 @@ public class Tela2Activity extends AppCompatActivity {
         mdb = new DadosOpenHelper(this, "lista", null, 1);
 
         updateTf();
-        exibirPedido();
+      //  exibirPedido();
 
     }
 
     public void exibirPedido(){
         ((EditText)findViewById(R.id.editText)).setText(" ");
-        Cursor cursor = mdb.getDados();
+        cursor = mdb.getDados();
         if(cursor.getCount() > 0){
             cursor.moveToFirst();
             do {
@@ -40,20 +41,23 @@ public class Tela2Activity extends AppCompatActivity {
                 String nome = cursor.getString(1);
                 String valor = cursor.getString(2);
                 CharSequence registro =" N° " + id + ",      "+"Nome: "+nome+",      "+"Valor: " + valor;
-//                CharSequence registroNome = nome;
- //               CharSequence registroValor = valor;
                 ((EditText)findViewById(R.id.editText)).append(registro + "\n");
-//                ((EditText)findViewById(R.id.editText2)).append(registroNome + "\n");
-//                ((EditText)findViewById(R.id.editText4)).append(registroValor + "\n");
-            }while (cursor.moveToNext());
 
+
+            }while (cursor.moveToNext());
+//            String idSet = cursor.getString(0);
+//            TextView tvId = (TextView)findViewById(R.id.tvId);
+//            tvId.setText(idSet);
         }
+
+
     }
 
     public void inserirDados(View view){
         String nome = ((TextView)findViewById(R.id.textView6)).getText().toString();
         String valor = ((TextView)findViewById(R.id.tvValort2)).getText().toString();
         mdb.insertDados(nome, valor);
+
         exibirPedido();
         toast();
     }
