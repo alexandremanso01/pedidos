@@ -21,6 +21,9 @@ import com.example.pedidos.DataBase.DadosOpenHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    Tela2Activity tela2Activity = new Tela2Activity();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
         });
         alerta = builder.create();
         alerta.show();
+    }
+
+    public void mostrarpedidos(){
+        tela2Activity.exibirPedido();
     }
 
 }

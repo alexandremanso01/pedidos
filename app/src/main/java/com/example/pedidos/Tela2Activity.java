@@ -46,8 +46,7 @@ public class Tela2Activity extends AppCompatActivity {
 
             }while (cursor.moveToNext());
 //            String idSet = cursor.getString(0);
-//            TextView tvId = (TextView)findViewById(R.id.tvId);
-//            tvId.setText(idSet);
+//
         }
 
 
@@ -60,6 +59,12 @@ public class Tela2Activity extends AppCompatActivity {
 
         exibirPedido();
         toast();
+
+        Cursor cursor1 = mdb.getDados();
+        cursor1.moveToLast();
+        String texto = cursor1.getString(0);
+        TextView tvId = (TextView)findViewById(R.id.tvId);
+        tvId.setText(texto);
     }
 
     public void updateTf(){
